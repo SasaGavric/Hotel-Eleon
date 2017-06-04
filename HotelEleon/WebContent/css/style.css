@@ -49,11 +49,11 @@ body {
 /* Global Structure ============================================================= */
 .main {
 	margin:0 auto;
-	width:1500px;
+	width:1200px;
 	padding:0 6px
 }
 .bg1 {
-	background:url(../images/bg.gif) top center repeat
+	background:url(../images/bg.gif) center;
 }
 .bg2 {
 	background:url(../images/bg_top.png) top center no-repeat
@@ -117,7 +117,7 @@ header {
 }
 #menu > li {
 	border-right:1px solid #f2f2f2;
-	margin-left:50px;
+	margin-left:11px;
 	float:left;
 }
 #menu .last {
@@ -171,10 +171,11 @@ header {
 }
 /* =========== kwiks slider ========= */
 .kwicks-wrapper {
-	width:640px;
+	width:100%;
 	overflow:hidden
 }
 .kwicks {/* recommended styles for kwicks ul container */
+
 	list-style:none;
 	position:relative;
 	margin:0;
@@ -184,7 +185,7 @@ header {
 	background:none
 }
 .kwicks li {/* these are required, but the values are up to you (must be pixel) */
-	width:160px;
+	width:100px;
 	height:414px;/*do not change these */
 	display:block;
 	overflow:hidden;
@@ -193,8 +194,10 @@ header {
 	background:none !important;
 }
 .kwicks.horizontal li {/* This is optional and will be disregarded by the script. However, it should be provided for non-JS enabled browsers. */
+width:247px;
 	margin-right:0;/*Set to same as spacing option. */
-	float:left
+	float:left;
+	position: inherit; 
 }
 .pad_bot1 {
 	padding-bottom:10px
