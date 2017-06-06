@@ -25,6 +25,12 @@ body {
 	line-height:20px;
 	min-width:980px
 }
+
+#something{
+	color:red;
+	margin-left: 150px;
+	
+}
 .ic, .ic a {
 	border:0;
 	float:right;

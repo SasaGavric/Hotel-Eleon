@@ -2,6 +2,8 @@ package com.sasa.javaee.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import com.sasa.javaee.model.Booking;
 import com.sasa.javaee.model.Customer;
 import com.sasa.javaee.model.HotelDateBaseUtil;
 
@@ -46,13 +49,13 @@ public class HotelControllerServlet extends HttpServlet {
 		}
 		try {
 			switch (command) {
-			
-			
+
 			case "INDEX":
 				toHomePage(request, response);
 				break;
 			case "BOOK":
-				addCustomer(request, response);
+				booking(request, response);
+
 				break;
 
 			}
@@ -62,12 +65,18 @@ public class HotelControllerServlet extends HttpServlet {
 
 	}
 
-	private void addCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+	private void booking(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException, ParseException {
 
 		Customer customer = new Customer(request.getParameter("firstName"), request.getParameter("lastName"),
 				request.getParameter("email"), request.getParameter("phone"));
 
 		dataBase.addNewCustomer(customer);
+
+		Booking booking = new Booking(new SimpleDateFormat().parse(request.getParameter("checkIn")),
+				new SimpleDateFormat().parse(request.getParameter("checkOut")), customer.getId(),
+				dataBase.getFreeRoom(request.getParameter("roomType")));
+		// dataBase.bookRoom(booking);
 
 		toHomePage(request, response);
 
