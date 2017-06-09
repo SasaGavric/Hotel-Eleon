@@ -3,18 +3,20 @@ package com.sasa.javaee.model;
 import java.util.Date;
 
 public class Booking {
-	Date bookingDate;
-	Date checkInDate;
-	Date checkOutDate;
-	int customerId;
-	int roomId;
+	private Date bookingDate;
+	private Date checkInDate;
+	private Date checkOutDate;
+	private Customer customer;
+	private Room room;
+	private String comment;
 	
-	public Booking(Date checkInDate, Date checkOutDate, int customerId, int roomId) {
+	public Booking(Date checkInDate, Date checkOutDate, Customer customer, Room room, String comment) {
 		this.bookingDate = new Date();
 		this.checkInDate = checkInDate;
 		this.checkOutDate = checkOutDate;
-		this.customerId = customerId;
-		this.roomId = roomId;
+		this.customer = customer;
+		this.room = room;
+		this.comment = comment;
 	}
 
 	public Date getBookingDate() {
@@ -41,22 +43,29 @@ public class Booking {
 		this.checkOutDate = checkOutDate;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public int getRoomId() {
-		return roomId;
+	public Room getRoom() {
+		return room;
 	}
 
-	public void setRoomId(int roomId) {
-		this.roomId = roomId;
+	public void setRoom(Room room) {
+		this.room = room;
 	}
-	
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	
 	
 	

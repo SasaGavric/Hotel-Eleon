@@ -1,9 +1,14 @@
 package com.sasa.javaee.model;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -15,9 +20,9 @@ public class HotelDateBaseUtil {
 		this.dataSource = dataSource;
 	}
 
-	public void addNewCustomer(Customer customer) throws SQLException {
+	public void bookingRoom(Customer customer, Booking book) throws SQLException {
 		try (Connection myConn = dataSource.getConnection()) {
-
+			
 			try (PreparedStatement myPstmt = myConn.prepareStatement("{call newCustomer(?,?,?,?)}")) {
 				myPstmt.setString(1, customer.getFirstName());
 				myPstmt.setString(2, customer.getLastName());
@@ -26,31 +31,74 @@ public class HotelDateBaseUtil {
 
 				myPstmt.execute();
 			}
+			
+			try (PreparedStatement myPstmt = myConn.prepareStatement("{call newBooking(?,?,?,?,?,?)}")) {
+				
+				myPstmt.setDate(1, new Date(book.getBookingDate().getTime()));
+				myPstmt.setDate(2, new Date(book.getCheckInDate().getTime()));
+				myPstmt.setDate(3, new Date(book.getCheckOutDate().getTime()));
+				myPstmt.setInt(4, getCustomerId());
+				myPstmt.setInt(5,  book.getRoom().getId());
+				myPstmt.setString(6, book.getComment());
 
+				myPstmt.execute();
+			}
+			
 		}
 
 	}
 
-	public void bookRoom(Booking book) throws SQLException {
+	
+	private int getCustomerId() throws SQLException {
+		try (Connection myConn = dataSource.getConnection()) {
+			try (CallableStatement myStmt = myConn.prepareCall("{call getLastCustomerId(?)}")) {
+				myStmt.registerOutParameter(1, Types.INTEGER);
+				myStmt.execute();
+
+				return myStmt.getInt(1);
+			}
+		}
+
+	}
+
+	public List<Room> getRooms() throws SQLException {
+
+		ArrayList<Room> listOfRooms = new ArrayList<Room>();
+
 		try (Connection myConn = dataSource.getConnection()) {
 
-			try (PreparedStatement myPstmt = myConn.prepareStatement("{call newBooking(?,?,?,?,?)}")) {
+			try (PreparedStatement myStmt = myConn.prepareStatement("{call getRooms()}")) {
+
+				try (ResultSet myRs = myStmt.executeQuery()) {
+					while (myRs.next()) {
+						listOfRooms.add(new Room(myRs.getInt(1), myRs.getInt(3), myRs.getBoolean(2)));
+					}
+				}
 
 			}
 
 		}
-
+		return listOfRooms;
 	}
 
-	public int getFreeRoom(String roomType) {
+	public Room getFreeRoom(String roomType) throws SQLException {
+
+		int roomId;
 
 		if (roomType.equals("classic")) {
-			return 1;
+			roomId = 1;
 		} else if (roomType.equals("silver")) {
-			return 2;
+			roomId = 2;
 		} else {
-			return 3;
+			roomId = 3;
 		}
+
+		for (Room room : getRooms()) {
+			if (room.getTypeId() == roomId && room.isBooked == false) {
+				return room;
+			}
+		}
+		return null;
 	}
 
 }

@@ -48,18 +48,32 @@ public class HotelControllerServlet extends HttpServlet {
 			command = request.getParameter("command");
 		}
 		try {
-			switch (command) {
-
-			case "INDEX":
+			if (command.equals("INDEX")) {
 				toHomePage(request, response);
-				break;
-			case "BOOK":
-				booking(request, response);
-
-				break;
-
 			}
 		} catch (Exception e) {
+			response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
+			e.printStackTrace(System.out);
+		}
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			String command;
+
+			if (request.getParameter("command") == null) {
+				command = "INDEX";
+			} else {
+				command = request.getParameter("command");
+			}
+
+			if (command.equals("BOOK")) {
+				booking(request, response);
+			}
+		} catch (Exception e) {
+			response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
 			e.printStackTrace(System.out);
 		}
 
@@ -71,14 +85,15 @@ public class HotelControllerServlet extends HttpServlet {
 		Customer customer = new Customer(request.getParameter("firstName"), request.getParameter("lastName"),
 				request.getParameter("email"), request.getParameter("phone"));
 
-		dataBase.addNewCustomer(customer);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-		Booking booking = new Booking(new SimpleDateFormat().parse(request.getParameter("checkIn")),
-				new SimpleDateFormat().parse(request.getParameter("checkOut")), customer.getId(),
-				dataBase.getFreeRoom(request.getParameter("roomType")));
-		// dataBase.bookRoom(booking);
+		Booking booking = new Booking(format.parse(request.getParameter("checkIn")),
+				format.parse(request.getParameter("checkOut")), customer,
+				dataBase.getFreeRoom(request.getParameter("roomType")), request.getParameter("comment"));
 
-		toHomePage(request, response);
+		dataBase.bookingRoom(customer, booking);
+
+		response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
 
 	}
 
