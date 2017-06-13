@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +28,7 @@
 				<!-- header -->
 				<header>
 					<h1>
-						Hotel Eleon</a>
+						Hotel Eleon
 					</h1>
 					<div class="department">
 						<br> <span>Freephone: &nbsp; +7 495 1556261</span>
@@ -36,7 +39,7 @@
 						<ul id="menu">
 							<li><a href="index.html">About Us</a></li>
 							<li><a href="services.html">Services</a></li>
-							<li class="active"><a href="booking.html">Booking</a></li>
+							<li class="active"><a href="booking.jsp">Booking</a></li>
 							<li><a href="rooms.html">Rooms</a></li>
 							<li><a href="contact.html">Contact Us</a></li>
 						</ul>
@@ -161,7 +164,7 @@
 											<li>King size bed</li>
 											<li>Jacuzzi bathtub</li>
 											<li>Security safe</li>
-											<li>Windows soundproof, may be opened</li>	
+											<li>Windows are sound proof, may be opened</li>	
 											<li>Ceilings, high</li>
 											</ul>
 											<ul class="list2">
