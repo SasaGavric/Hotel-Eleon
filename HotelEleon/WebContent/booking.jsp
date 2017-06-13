@@ -182,7 +182,7 @@
 								<div class="col2">
 									<h2>About Booking</h2>
 									<p class="pad_bot1">
-										<strong class="color2">Chose one of our 3 luxurious rooms </strong>
+										<strong class="color2">Chose one of our 3 luxurious room types </strong>
 									</p>
 
 									<div class="wrapper">
