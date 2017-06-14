@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -22,7 +24,7 @@ public class HotelDateBaseUtil {
 
 	public void bookingRoom(Customer customer, Booking book) throws SQLException {
 		try (Connection myConn = dataSource.getConnection()) {
-			
+
 			try (PreparedStatement myPstmt = myConn.prepareStatement("{call newCustomer(?,?,?,?)}")) {
 				myPstmt.setString(1, customer.getFirstName());
 				myPstmt.setString(2, customer.getLastName());
@@ -31,24 +33,23 @@ public class HotelDateBaseUtil {
 
 				myPstmt.execute();
 			}
-			
+
 			try (PreparedStatement myPstmt = myConn.prepareStatement("{call newBooking(?,?,?,?,?,?)}")) {
-				
+
 				myPstmt.setDate(1, new Date(book.getBookingDate().getTime()));
 				myPstmt.setDate(2, new Date(book.getCheckInDate().getTime()));
 				myPstmt.setDate(3, new Date(book.getCheckOutDate().getTime()));
 				myPstmt.setInt(4, getCustomerId());
-				myPstmt.setInt(5,  book.getRoom().getId());
+				myPstmt.setInt(5, book.getRoom().getId());
 				myPstmt.setString(6, book.getComment());
 
 				myPstmt.execute();
 			}
-			
+
 		}
 
 	}
 
-	
 	private int getCustomerId() throws SQLException {
 		try (Connection myConn = dataSource.getConnection()) {
 			try (CallableStatement myStmt = myConn.prepareCall("{call getLastCustomerId(?)}")) {
@@ -100,5 +101,22 @@ public class HotelDateBaseUtil {
 		}
 		return null;
 	}
-
+	
+	public Set<String> getAvailableRooms() throws SQLException{
+		Set<String> listOfAvailableRooms = new HashSet<>();
+		
+		for (Room room : getRooms()) {
+			if (!room.isBooked) {
+				if (room.typeId==1) {
+					listOfAvailableRooms.add("Classic");
+				}else if(room.typeId==2){
+					listOfAvailableRooms.add("Silver");
+				}else{
+					listOfAvailableRooms.add("Gold");
+				}
+			}
+		}
+		return listOfAvailableRooms;
+	}
+	
 }

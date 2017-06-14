@@ -41,18 +41,27 @@ public class HotelControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String command;
-
+		
 		if (request.getParameter("command") == null) {
 			command = "INDEX";
 		} else {
 			command = request.getParameter("command");
 		}
+
 		try {
 			if (command.equals("INDEX")) {
 				toHomePage(request, response);
+			}else if(command.equals("BOOKING_PAGE")){
+				
+				request.setAttribute("availableRooms", dataBase.getAvailableRooms().size()>0);
+				request.setAttribute("availableTypes", dataBase.getAvailableRooms());
+				
+				
+				
+				toBookingPage(request, response);
 			}
 		} catch (Exception e) {
-			response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
+			toHomePage(request, response);
 			e.printStackTrace(System.out);
 		}
 
@@ -60,19 +69,22 @@ public class HotelControllerServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		String command;
+
+		if (request.getParameter("command") == null) {
+			command = "INDEX";
+		} else {
+			command = request.getParameter("command");
+		}
+
 		try {
-			String command;
-
-			if (request.getParameter("command") == null) {
-				command = "INDEX";
-			} else {
-				command = request.getParameter("command");
-			}
-
 			if (command.equals("BOOK")) {
 				booking(request, response);
+			}else{
+				response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
 			}
-		} catch (Exception e) {
+		}catch (Exception e) {
 			response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
 			e.printStackTrace(System.out);
 		}
@@ -102,6 +114,16 @@ public class HotelControllerServlet extends HttpServlet {
 
 		// get RequestDispatcher
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
+
+		dispatcher.forward(request, response);
+
+	}
+	
+	private void toBookingPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// get RequestDispatcher
+		RequestDispatcher dispatcher = request.getRequestDispatcher("booking.jsp");
 
 		dispatcher.forward(request, response);
 

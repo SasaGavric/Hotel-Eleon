@@ -1,4 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+  
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <title>Hotel Eleon | Booking</title>
@@ -32,20 +37,21 @@
 					</div>
 				</header>
 				<div class="box">
-					<nav>
+					
 						<ul id="menu">
 							<li><a href="index.html">About Us</a></li>
 							<li><a href="services.html">Services</a></li>
-							<li class="active"><a href="booking.html">Booking</a></li>
+							<li class="active"><a href="HotelControllerServlet?command=BOOKING_PAGE">Booking</a></li>
 							<li><a href="rooms.html">Rooms</a></li>
 							<li><a href="contact.html">Contact Us</a></li>
 						</ul>
-					</nav>
+					
 					<!-- header end -->
 					<!-- content -->
 					<article id="content">
 						<div class="box1">
 							<div class="wrapper">
+							<c:if test="${availableRooms }">
 								<form action="HotelControllerServlet" id="form1" method="POST"
 									onsubmit="if (!(confirm('Are you sure you want to book this room'))) return false">
 									<input type="hidden" name="command" value="BOOK" />
@@ -78,10 +84,10 @@
 										</div>
 
 										<div class="row">
-											Room Type: <select name="roomType">
-												<option value="classic">Classic</option>
-												<option value="silver">Silver</option>
-												<option value="gold">Gold</option>
+											Available Room Types: <select name="roomType">
+											<c:forEach var="roomTypes" items="${availableTypes }" >
+												<option value="${roomTypes}">${roomTypes}</option>
+											</c:forEach>
 											</select>
 										</div>
 
@@ -99,7 +105,7 @@
 								</form>
 								<div class="col2 pad">
 									<h2>
-										<img src="images/title_marker1.jpg" alt="">Available
+										<img src="images/title_marker1.jpg" alt="">
 										Rooms
 									</h2>
 									<div class="wrapper line1">
@@ -172,6 +178,10 @@
 										</div>
 									</div>
 								</div>
+								</c:if>
+								<c:if test="${not availableRooms }">
+									<h2 id="sorry">We are very sorry but all rooms are booked</h2>
+								</c:if>
 							</div>
 						</div>
 						<div class="pad">
