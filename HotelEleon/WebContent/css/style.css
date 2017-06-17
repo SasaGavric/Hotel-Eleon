@@ -224,7 +224,7 @@ width:247px;
 	padding:40px 0 39px 40px
 }
 .box1 .pad {
-	padding:20px 0 15px 30px
+	padding:20px 0 15px 110px
 }
 .marg_right1 {
 	margin-right:20px
@@ -366,7 +366,7 @@ footer a:hover {
 	font:12px Arial, Helvetica, sans-serif
 }
 #form1 {
-	width:240px;
+	width:290px;
 	float:right;
 	padding:30px;
 	background:#12110f
@@ -523,4 +523,14 @@ a.jqTransformSelectOpen {
 	font-size: 24px;
 	height: 200px;
 	padding-top: 10%;
+}
+
+.pics{
+	width: 380px;
+	height: 300px;
+	margin: 5px;
+}
+
+#mos{
+	width: 600px;
 }

@@ -42,7 +42,7 @@
 							<li><a href="index.html">About Us</a></li>
 							<li><a href="services.html">Services</a></li>
 							<li class="active"><a href="HotelControllerServlet?command=BOOKING_PAGE">Booking</a></li>
-							<li><a href="rooms.html">Rooms</a></li>
+							<li><a href="gallery.html">Gallery</a></li>
 							<li><a href="contact.html">Contact Us</a></li>
 						</ul>
 					
@@ -199,7 +199,7 @@
 										<p class="pad_bot1">
 											<strong class="color2">Fill out online form</strong>
 										</p>
-										<p class="pad_bot2">When You book room you need to check in hotel on reception with your id card or passport.</p>
+										<p class="pad_bot2">When You book room you need to check in hotel on reception with your <br>id card or passport.</p>
 									</div>
 
 

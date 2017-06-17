@@ -86,9 +86,9 @@ public class HotelDateBaseUtil {
 
 		int roomId;
 
-		if (roomType.equals("classic")) {
+		if (roomType.equals("Classic")) {
 			roomId = 1;
-		} else if (roomType.equals("silver")) {
+		} else if (roomType.equals("Silver")) {
 			roomId = 2;
 		} else {
 			roomId = 3;
@@ -101,22 +101,23 @@ public class HotelDateBaseUtil {
 		}
 		return null;
 	}
-	
-	public Set<String> getAvailableRooms() throws SQLException{
+
+	public Set<String> getAvailableRooms() throws SQLException {
 		Set<String> listOfAvailableRooms = new HashSet<>();
-		
-		for (Room room : getRooms()) {
+
+		getRooms().forEach((room) ->{
 			if (!room.isBooked) {
-				if (room.typeId==1) {
+				if (room.typeId == 1) {
 					listOfAvailableRooms.add("Classic");
-				}else if(room.typeId==2){
+				} else if (room.typeId == 2) {
 					listOfAvailableRooms.add("Silver");
-				}else{
+				} else {
 					listOfAvailableRooms.add("Gold");
 				}
 			}
-		}
+		});
+		
 		return listOfAvailableRooms;
 	}
-	
+
 }

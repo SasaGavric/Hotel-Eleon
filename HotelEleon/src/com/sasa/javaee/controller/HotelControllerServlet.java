@@ -41,7 +41,7 @@ public class HotelControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String command;
-		
+
 		if (request.getParameter("command") == null) {
 			command = "INDEX";
 		} else {
@@ -51,13 +51,11 @@ public class HotelControllerServlet extends HttpServlet {
 		try {
 			if (command.equals("INDEX")) {
 				toHomePage(request, response);
-			}else if(command.equals("BOOKING_PAGE")){
-				
-				request.setAttribute("availableRooms", dataBase.getAvailableRooms().size()>0);
+			} else if (command.equals("BOOKING_PAGE")) {
+
+				request.setAttribute("availableRooms", dataBase.getAvailableRooms().size() > 0);
 				request.setAttribute("availableTypes", dataBase.getAvailableRooms());
-				
-				
-				
+
 				toBookingPage(request, response);
 			}
 		} catch (Exception e) {
@@ -81,10 +79,10 @@ public class HotelControllerServlet extends HttpServlet {
 		try {
 			if (command.equals("BOOK")) {
 				booking(request, response);
-			}else{
+			} else {
 				response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
 			e.printStackTrace(System.out);
 		}
@@ -102,6 +100,8 @@ public class HotelControllerServlet extends HttpServlet {
 		Booking booking = new Booking(format.parse(request.getParameter("checkIn")),
 				format.parse(request.getParameter("checkOut")), customer,
 				dataBase.getFreeRoom(request.getParameter("roomType")), request.getParameter("comment"));
+		
+		
 
 		dataBase.bookingRoom(customer, booking);
 
@@ -118,7 +118,7 @@ public class HotelControllerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-	
+
 	private void toBookingPage(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
