@@ -46,21 +46,22 @@
              
               <div class="col2 pad">
                 <h2><img src="images/title_marker1.jpg" alt="">Contact Form</h2>
-                <form id="ContactForm" action="#">
+                <form id="ContactForm" action="HotelControllerServlet" method="POST">
+                <input type="hidden" name="command" value="CONTACT"/>
                   <div>
                     <div  class="wrapper">
-                      <input type="text" class="input">
+                      <input type="text" name="name" class="input">
                       Name: </div>
                     <div  class="wrapper">
-                      <input type="text" class="input">
+                      <input type="text" name="adress" class="input">
                       Address: </div>
                     <div  class="wrapper">
-                      <input type="text" class="input">
+                      <input type="text" name="email" class="input">
                       Email: </div>
                     <div  class="textarea_box">
                       <textarea name="textarea" cols="1" rows="1"></textarea>
                       Contacts: </div>
-                    <a href="#" class="button2">Send</a> <a href="#" class="button2">Clear</a> </div>
+                    <input type="submit" value="Submit" class="button2"> </div>
                 </form>
               </div>
             </div>

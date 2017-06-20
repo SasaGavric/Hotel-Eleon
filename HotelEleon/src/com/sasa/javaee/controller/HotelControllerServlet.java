@@ -23,10 +23,10 @@ import com.sasa.javaee.model.HotelDateBaseUtil;
  */
 @WebServlet("/HotelControllerServlet")
 public class HotelControllerServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 	@Resource(name = "jdbc/hoteleleon")
 	DataSource dataSource;
-
 	HotelDateBaseUtil dataBase;
 
 	public void init() {
@@ -79,6 +79,8 @@ public class HotelControllerServlet extends HttpServlet {
 		try {
 			if (command.equals("BOOK")) {
 				booking(request, response);
+			}else if(command.equals("CONTACT")){
+				sendEmail(request,response);
 			} else {
 				response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
 			}
@@ -87,6 +89,15 @@ public class HotelControllerServlet extends HttpServlet {
 			e.printStackTrace(System.out);
 		}
 
+	}
+
+	private void sendEmail(HttpServletRequest request, HttpServletResponse response) {
+		
+		MailApp.sendEmail(request.getParameter("name") + " \n" 
+		+ request.getParameter("adress") 
+		+ " \n"+ request.getParameter("email") + " \n\n"
+		+ request.getParameter("textarea"));
+		
 	}
 
 	private void booking(HttpServletRequest request, HttpServletResponse response)
@@ -100,8 +111,6 @@ public class HotelControllerServlet extends HttpServlet {
 		Booking booking = new Booking(format.parse(request.getParameter("checkIn")),
 				format.parse(request.getParameter("checkOut")), customer,
 				dataBase.getFreeRoom(request.getParameter("roomType")), request.getParameter("comment"));
-		
-		
 
 		dataBase.bookingRoom(customer, booking);
 

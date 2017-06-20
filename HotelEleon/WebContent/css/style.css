@@ -131,7 +131,7 @@ header {
 }
 #menu > li > a {
 	display:block;
-	padding:0 62px;
+	padding:0 61px;
 	font-size:24px;
 	color:#12110f;
 	text-decoration:none;
@@ -533,4 +533,8 @@ a.jqTransformSelectOpen {
 
 #mos{
 	width: 600px;
+}
+
+.button2{
+	margin-left: 80%;
 }
