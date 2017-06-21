@@ -34,14 +34,13 @@ public class HotelDateBaseUtil {
 				myPstmt.execute();
 			}
 
-			try (PreparedStatement myPstmt = myConn.prepareStatement("{call newBooking(?,?,?,?,?,?)}")) {
+			try (PreparedStatement myPstmt = myConn.prepareStatement("{call newBooking(?,?,?,?,?)}")) {
 
 				myPstmt.setDate(1, new Date(book.getBookingDate().getTime()));
 				myPstmt.setDate(2, new Date(book.getCheckInDate().getTime()));
 				myPstmt.setDate(3, new Date(book.getCheckOutDate().getTime()));
 				myPstmt.setInt(4, getCustomerId());
-				myPstmt.setInt(5, book.getRoom().getId());
-				myPstmt.setString(6, book.getComment());
+				myPstmt.setString(5, book.getComment());
 
 				myPstmt.execute();
 			}

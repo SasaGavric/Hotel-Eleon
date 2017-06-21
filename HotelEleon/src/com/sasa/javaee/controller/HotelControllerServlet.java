@@ -79,8 +79,9 @@ public class HotelControllerServlet extends HttpServlet {
 		try {
 			if (command.equals("BOOK")) {
 				booking(request, response);
-			}else if(command.equals("CONTACT")){
-				sendEmail(request,response);
+			} else if (command.equals("CONTACT")) {
+				sendEmail(request, response);
+				response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/HotelControllerServlet?command=INDEX");
 			}
@@ -92,12 +93,10 @@ public class HotelControllerServlet extends HttpServlet {
 	}
 
 	private void sendEmail(HttpServletRequest request, HttpServletResponse response) {
-		
-		MailApp.sendEmail(request.getParameter("name") + " \n" 
-		+ request.getParameter("adress") 
-		+ " \n"+ request.getParameter("email") + " \n\n"
-		+ request.getParameter("textarea"));
-		
+
+		MailApp.sendEmail(request.getParameter("name") + " \n" + request.getParameter("adress") + " \n"
+				+ request.getParameter("email") + " \n\n" + request.getParameter("textarea"));
+
 	}
 
 	private void booking(HttpServletRequest request, HttpServletResponse response)

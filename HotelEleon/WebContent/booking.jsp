@@ -18,6 +18,7 @@
 <script type="text/javascript" src="js/jquery.jqtransform.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/atooltip.jquery.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script:700" rel="stylesheet">
 <!--[if lt IE 9]>
 <script type="text/javascript" src="js/html5.js"></script>
 <link rel="stylesheet" href="css/ie.css" type="text/css" media="all">
@@ -29,9 +30,7 @@
 			<div class="main">
 				<!-- header -->
 				<header>
-					<h1>
-						Hotel Eleon</a>
-					</h1>
+					<h1>Hotel <span id="title">Eleon</span></h1>
 					<div class="department">
 						<br> <span>Freephone: &nbsp; +7 495 1556261</span>
 					</div>
@@ -58,29 +57,29 @@
 									<h2>Book a Room</h2>
 									<fieldset>
 										<div class="row">
-											<input type="text" name="firstName" required="required"
+											<input type="text" name="firstName" required="required" maxlength="25"
 												class="input"> First Name:
 										</div>
 										<div class="row">
-											<input type="text" name="lastName" required="required"
+											<input type="text" name="lastName" required="required" maxlength="25"
 												class="input"> Last Name:
 										</div>
 										<div class="row">
-											<input type="text" name="email" required="required"
+											<input type="text" name="email" required="required" maxlength="30"
 												class="input"> E-Mail Address:
 										</div>
 										<div class="row">
-											<input type="text" name="phone" required="required"
+											<input type="text" name="phone" required="required" maxlength="20"
 												class="input"> Phone:
 										</div>
 										<div class="row">
 
 											Check in: <input type="date" name="checkIn"
-												required="required" class="input">
+												required="required" class="input" >
 										</div>
 										<div class="row">
 											Check out: <input type="date" name="checkOut"
-												required="required" class="input">
+												required="required" class="input" >
 										</div>
 
 										<div class="row">

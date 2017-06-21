@@ -81,9 +81,9 @@ a:hover {
 	text-decoration:none
 }
 h1 {
-	font-size:80px;
+	font-size:102px;
 	color:white;
-	font-family:serif;
+	font-family: 'Dancing Script', cursive;
 	padding:40px 0 0 55px;
 	float:left
 }
@@ -380,7 +380,7 @@ footer a:hover {
 	width:140px
 }
 #form1 .row {
-	height:30px;
+	height:35px;
 	line-height:22px
 }
 #form1 .row_textarea {
@@ -402,7 +402,7 @@ footer a:hover {
 	background:none;
 	height:54px;
 	padding:3px 5px;
-	width:222px;
+	width:275px;
 	margin:0;
 	overflow:auto
 }
@@ -538,3 +538,10 @@ a.jqTransformSelectOpen {
 .button2{
 	margin-left: 80%;
 }
+
+#title{
+	color:#FFD700;
+}
+
+
+
