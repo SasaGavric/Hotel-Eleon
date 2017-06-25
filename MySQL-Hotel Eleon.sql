@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `hoteleleon` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `hoteleleon`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: hoteleleon
@@ -34,6 +36,15 @@ CREATE TABLE `bill` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `bill`
+--
+
+LOCK TABLES `bill` WRITE;
+/*!40000 ALTER TABLE `bill` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bill` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `booking`
 --
 
@@ -46,14 +57,24 @@ CREATE TABLE `booking` (
   `checkInDate` date NOT NULL,
   `checkOutDate` date NOT NULL,
   `customerId` int(11) NOT NULL,
-  `roomId` int(11) NOT NULL,
+  `roomId` int(11) DEFAULT NULL,
+  `comments` text,
   PRIMARY KEY (`bookingID`),
   KEY `customer_idx` (`customerId`),
   KEY `roomId_idx` (`roomId`),
   CONSTRAINT `customerId` FOREIGN KEY (`customerId`) REFERENCES `customer` (`customerId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `roomId` FOREIGN KEY (`roomId`) REFERENCES `room` (`roomId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  CONSTRAINT `roomId` FOREIGN KEY (`roomId`) REFERENCES `room` (`roomId`) ON DELETE SET NULL ON UPDATE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booking`
+--
+
+LOCK TABLES `booking` WRITE;
+/*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+/*!40000 ALTER TABLE `booking` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `customer`
@@ -72,8 +93,17 @@ CREATE TABLE `customer` (
   `phone` varchar(20) NOT NULL,
   `email` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`customerId`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer`
+--
+
+LOCK TABLES `customer` WRITE;
+/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `employee`
@@ -100,6 +130,15 @@ CREATE TABLE `employee` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `employee`
+--
+
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `hoteldepartment`
 --
 
@@ -112,6 +151,15 @@ CREATE TABLE `hoteldepartment` (
   PRIMARY KEY (`departmentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hoteldepartment`
+--
+
+LOCK TABLES `hoteldepartment` WRITE;
+/*!40000 ALTER TABLE `hoteldepartment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hoteldepartment` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ordereditem`
@@ -131,6 +179,15 @@ CREATE TABLE `ordereditem` (
   CONSTRAINT `ordereditem_ibfk_1` FOREIGN KEY (`billId`) REFERENCES `bill` (`billNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ordereditem`
+--
+
+LOCK TABLES `ordereditem` WRITE;
+/*!40000 ALTER TABLE `ordereditem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ordereditem` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `payment`
@@ -153,6 +210,15 @@ CREATE TABLE `payment` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `payment`
+--
+
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `room`
 --
 
@@ -168,6 +234,16 @@ CREATE TABLE `room` (
   CONSTRAINT `type` FOREIGN KEY (`typeId`) REFERENCES `roomtype` (`roomTypeId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room`
+--
+
+LOCK TABLES `room` WRITE;
+/*!40000 ALTER TABLE `room` DISABLE KEYS */;
+INSERT INTO `room` VALUES (1,0,1),(2,0,1),(3,0,1),(4,0,2),(5,0,2),(6,0,2),(7,0,3),(8,0,3),(9,0,3);
+/*!40000 ALTER TABLE `room` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `roomimages`
@@ -187,6 +263,15 @@ CREATE TABLE `roomimages` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `roomimages`
+--
+
+LOCK TABLES `roomimages` WRITE;
+/*!40000 ALTER TABLE `roomimages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `roomimages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `roomtype`
 --
 
@@ -201,6 +286,16 @@ CREATE TABLE `roomtype` (
   UNIQUE KEY `roomTypeName_UNIQUE` (`roomTypeName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roomtype`
+--
+
+LOCK TABLES `roomtype` WRITE;
+/*!40000 ALTER TABLE `roomtype` DISABLE KEYS */;
+INSERT INTO `roomtype` VALUES (1,'Classic',70.00),(2,'Silver',150.00),(3,'Gold',350.00);
+/*!40000 ALTER TABLE `roomtype` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `servicedby`
@@ -219,6 +314,15 @@ CREATE TABLE `servicedby` (
   CONSTRAINT `servicedby_ibfk_2` FOREIGN KEY (`departmentId`) REFERENCES `hoteldepartment` (`departmentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `servicedby`
+--
+
+LOCK TABLES `servicedby` WRITE;
+/*!40000 ALTER TABLE `servicedby` DISABLE KEYS */;
+/*!40000 ALTER TABLE `servicedby` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `supplier`
@@ -240,6 +344,107 @@ CREATE TABLE `supplier` (
   CONSTRAINT `supplier_ibfk_1` FOREIGN KEY (`departmentId`) REFERENCES `hoteldepartment` (`departmentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `supplier`
+--
+
+LOCK TABLES `supplier` WRITE;
+/*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'hoteleleon'
+--
+
+--
+-- Dumping routines for database 'hoteleleon'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `getLastCustomerId` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`student`@`localhost` PROCEDURE `getLastCustomerId`(OUT cId INT)
+BEGIN
+
+SELECT MAX(customerId) INTO cId FROM customer;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getRooms` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`student`@`localhost` PROCEDURE `getRooms`()
+BEGIN
+
+SELECT * FROM room;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `newBooking` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`student`@`localhost` PROCEDURE `newBooking`(IN cDate DATE, IN checkIn DATE, IN checkOut DATE, IN cId INT, IN comm TEXT)
+BEGIN
+    
+    INSERT INTO booking (bookingDate, checkInDate, checkOutDate, customerId, comments)  VALUES (cDate, checkIn , checkOut ,  cId , comm);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `newCustomer` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`student`@`localhost` PROCEDURE `newCustomer`(IN fn VARCHAR(25), IN ln VARCHAR(25), IN e VARCHAR(30),IN p VARCHAR(30))
+BEGIN
+
+INSERT INTO customer (firstName, lastName, email, phone) VALUES (fn,ln,e,p);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -250,4 +455,4 @@ CREATE TABLE `supplier` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-04 21:58:36
+-- Dump completed on 2017-06-23 19:38:28
