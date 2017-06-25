@@ -93,9 +93,10 @@ public class HotelControllerServlet extends HttpServlet {
 	}
 
 	private void sendEmail(HttpServletRequest request, HttpServletResponse response) {
+		
+		Email email = new Email(request.getParameter("name"),request.getParameter("adress"), request.getParameter("email"), request.getParameter("textarea"));
 
-		MailApp.sendEmail(request.getParameter("name") + " \n" + request.getParameter("adress") + " \n"
-				+ request.getParameter("email") + " \n\n" + request.getParameter("textarea"));
+		MailApp.sendEmail(email);
 
 	}
 

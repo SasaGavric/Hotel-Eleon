@@ -12,10 +12,11 @@ import javax.mail.internet.MimeMessage;
 
 public class MailApp {
 
-	protected static void sendEmail(String text) {
+	protected static void sendEmail(Email email) {
 
 		final String username = "sasateslic1995@gmail.com";
 		final String password = "spiral2017";
+		final String subject = "Hotel Eleon-Contact";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -33,10 +34,10 @@ public class MailApp {
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("sasateslic1995@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("sasateslic1995@gmail.com"));
-			message.setSubject("Hotel Eleon-Contact");
-			message.setText(text);
+			message.setFrom(new InternetAddress(username));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(username));
+			message.setSubject(subject);
+			message.setText(email.toString());
 
 			Transport.send(message);
 
