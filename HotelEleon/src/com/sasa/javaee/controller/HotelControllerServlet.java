@@ -26,8 +26,8 @@ public class HotelControllerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	@Resource(name = "jdbc/hoteleleon")
-	DataSource dataSource;
-	HotelDateBaseUtil dataBase;
+	private DataSource dataSource;
+	private HotelDateBaseUtil dataBase;
 
 	public void init() {
 		dataBase = new HotelDateBaseUtil(dataSource);
