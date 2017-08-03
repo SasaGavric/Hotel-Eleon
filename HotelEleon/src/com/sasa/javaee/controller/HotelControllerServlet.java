@@ -94,7 +94,7 @@ public class HotelControllerServlet extends HttpServlet {
 
 	private void sendEmail(HttpServletRequest request, HttpServletResponse response) {
 		
-		Email email = new Email(request.getParameter("name"),request.getParameter("adress"), request.getParameter("email"), request.getParameter("textarea"));
+		final Email email = new Email(request.getParameter("name"),request.getParameter("adress"), request.getParameter("email"), request.getParameter("textarea"));
 
 		MailApp.sendEmail(email);
 
@@ -108,7 +108,7 @@ public class HotelControllerServlet extends HttpServlet {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-		Booking booking = new Booking(format.parse(request.getParameter("checkIn")),
+		final Booking booking = new Booking(format.parse(request.getParameter("checkIn")),
 				format.parse(request.getParameter("checkOut")), customer,
 				dataBase.getFreeRoom(request.getParameter("roomType")), request.getParameter("comment"));
 
