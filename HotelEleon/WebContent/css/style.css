@@ -423,6 +423,7 @@ footer a:hover {
 }
 
 #ContactForm textarea {
+	resize:none;
 	overflow: auto;
 	margin: 0;
 	float: right;

@@ -52,7 +52,7 @@ public class HotelControllerServlet extends HttpServlet {
 			if (command.equals("INDEX")) {
 				toHomePage(request, response);
 			} else if (command.equals("BOOKING_PAGE")) {
-
+				System.out.println("Booking");
 				request.setAttribute("availableRooms", dataBase.getAvailableRooms().size() > 0);
 				request.setAttribute("availableTypes", dataBase.getAvailableRooms());
 

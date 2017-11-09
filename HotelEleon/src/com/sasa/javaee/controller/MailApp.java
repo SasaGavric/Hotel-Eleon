@@ -14,7 +14,7 @@ public class MailApp {
 
 	protected static void sendEmail(Email email) {
 
-		final String username = "sasateslic1995@gmail.com";
+		final String username = "sasa@gmail.com";
 		final String password = "spiral2017";
 		final String subject = "Hotel Eleon-Contact";
 
